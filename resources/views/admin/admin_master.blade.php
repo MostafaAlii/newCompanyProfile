@@ -51,6 +51,7 @@
 @include('admin.includes._sidebar')
 <!-- BEGIN: Content-->
 <div class="app-content content">
+    @include('admin.includes._partials.messages')
     @yield('content')
 </div>
 <!-- END: Content-->
@@ -78,6 +79,7 @@
 <!-- BEGIN: Page JS-->
 <script src="{{ asset('app-assets/js/scripts/pages/material-app.js') }}"></script>
 <script src="{{ asset('app-assets/js/scripts/pages/dashboard-sales.js') }}"></script>
+<script src="{{ asset('app-assets/js/customFun.js') }}"></script>
 <!-- END: Page JS-->
 @yield('js')
 </body>

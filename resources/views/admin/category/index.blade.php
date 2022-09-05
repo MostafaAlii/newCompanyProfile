@@ -33,7 +33,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="ml-auto">
-                    <a href="" class="btn btn-primary">
+                    <a href="{{ route('categories.create') }}" class="btn btn-primary">
                         <span class="icon text-white-50">
                             <i class="fa fa-plus"></i>
                         </span>
