@@ -21,6 +21,14 @@ class Project extends Model {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
+    public function status() {
+        return $this->status ? 'فعــال' : 'غير فعــال';
+    }
+
+    public function firstMedia() {
+        return $this->MorphOne(Media::class, 'mediable')->orderBy('file_sort', 'asc');
+    }
+
     public function media() {
         return $this->MorphMany(Media::class, 'mediable');
     }

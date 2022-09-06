@@ -91,7 +91,7 @@
                     <tr>
                         <td colspan="6">
                             <div class="float-right">
-                                {!! $categories->links() !!}
+                                {!! $categories->appends(request()->all())->links() !!}
                             </div>
                         </td>
                     </tr>

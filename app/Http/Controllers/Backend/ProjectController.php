@@ -5,18 +5,20 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 class ProjectController extends Controller {
     public function index() {
-        $projects = Project::get();
+        $projects = Project::with('category', 'firstMedia')
+        ->when(request()->keyword != null, function ($query){
+            $query->search(request()->keyword);
+        })
+        ->when(request()->status != null, function ($query){
+            $query->whereStatus(request()->status);
+        })
+        ->orderBy(request()->sort_by ?? 'id', request()->order_by ?? 'desc')
+        ->paginate(request()->limit_by ?? 10);
         return view('admin.project.index', compact('projects'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function create() {
+        return view('admin.project.create');
     }
 
     /**
