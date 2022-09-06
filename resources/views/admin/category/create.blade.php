@@ -21,7 +21,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">لوحة التحكم</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('categories.index') }}">الاقســـام</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('categories.store') }}">اضافة قسم جديد</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('categories.create') }}">اضافة قسم جديد</a></li>
                 </ol>
             </div>
         </div>

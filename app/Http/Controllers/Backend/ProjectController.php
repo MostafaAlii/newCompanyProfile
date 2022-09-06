@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
-use App\Models\Project;
+use App\Models\{Category, Project};
 use Illuminate\Http\Request;
 class ProjectController extends Controller {
     public function index() {
@@ -18,17 +18,11 @@ class ProjectController extends Controller {
     }
 
     public function create() {
-        return view('admin.project.create');
+        $categories = Category::whereStatus(1)->get(['id','name']);
+        return view('admin.project.create', compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
     }
 
