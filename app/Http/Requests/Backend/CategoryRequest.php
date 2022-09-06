@@ -17,7 +17,8 @@ class CategoryRequest extends FormRequest {
             case 'PUT' : 
             case 'PATCH' : {
                 return [
-
+                    'name'          =>          'required|max:255|unique:categories,name,' . $this->route()->category->id,
+                    'status'        =>          'required',
                 ];
             }
             default: break;

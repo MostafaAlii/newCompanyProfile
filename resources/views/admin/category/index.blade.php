@@ -62,18 +62,21 @@
                         <tr>
                             <td>{{$category->name }}</td>
                             <td>{{$category->projects_count }}</td>
-                            <td>{{$category->status }}</td>
+                            <td>{{$category->status() }}</td>
                             <td>{{$category->created_at }}</td>
                             <td>
                                 <div class="btn-group">
                                     <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-primary">
                                         <i class="material-icons">edit</i>
                                     </a>
-                                    <a href="{{ route('categories.destroy', $category->id) }}" class="btn btn-danger">
+                                    <a href="javascript:void(0);" onclick="if(confirm('هل انت متاكد من الحذف')){document.getElementById('delete-category-{{$category->id}}').submit();} else{return false;}" class="btn btn-danger">
                                         <i class="ft ft-trash-2"></i>
-
                                     </a>
                                 </div>
+                                <form class="d-none" action="{{ route('categories.destroy', $category->id) }}" method="POST" id="delete-category-{{$category->id}}">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
                             </td>
                         </tr>
                     @empty

@@ -40,19 +40,40 @@ class CategoryController extends Controller {
         }
     }
 
-    public function show($id) {
-        //
+    public function edit(Category $category) {
+        return view('admin.category.edit', compact('category'));
     }
 
-    public function edit($id) {
-        //
+    public function update(CategoryRequest $request, Category $category) {
+        try {
+            $input['name'] = $request->name;
+            $input['slug'] = null;
+            $input['status'] = $request->status;
+            $category->update($input);
+            return redirect()->route('categories.index')->with([
+                'message' => 'تم تعديل القسم بنجاح',
+                'alert-type' => 'success'
+            ]);
+        } catch(\Exception $ex) {
+            return redirect()->route('categories.index')->with([
+                'message' => 'عفواً حدث خطأ ما',
+                'alert-type' => 'danger'
+            ]);
+        }
     }
 
-    public function update(Request $request, $id) {
-        //
-    }
-
-    public function destroy($id) {
-        //
+    public function destroy(Category $category) {      
+        try {
+            $category->delete();
+            return redirect()->route('categories.index')->with([
+                'message' => 'تم حذف القسم بنجاح',
+                'alert-type' => 'success'
+            ]);
+        } catch(\Exception $ex) {
+            return redirect()->route('categories.index')->with([
+                'message' => 'عفواً حدث خطأ ما',
+                'alert-type' => 'danger'
+            ]);
+        }
     }
 }

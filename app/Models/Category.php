@@ -24,6 +24,10 @@ class Category extends Model {
         ]
     ];
 
+    public function status() {
+        return $this->status ? 'فعــال' : 'غير فعــال';
+    }
+
     public function projects() {
         return $this->hasMany(Project::class);    
     }
