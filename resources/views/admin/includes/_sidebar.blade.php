@@ -34,22 +34,37 @@
             </li>
             <!-- End Dashboard -->
 
+            <!-- Start Users -->
+            @if(auth()->user()->hasPermission('users_read'))
+                <li class=" nav-item">
+                    <a href="{{ route('users.index') }}">
+                        <i class="icon-user-following"></i>
+                        <span class="menu-title" data-i18n="Category">المستخدمين</span>
+                    </a>
+                </li>
+            @endif
+            <!-- End Users -->
+
             <!-- Start Category -->
-            <li class=" nav-item">
-                <a href="{{ route('categories.index') }}">
-                    <i class="icon-drawer"></i>
-                    <span class="menu-title" data-i18n="Dashboard">الاقسام</span>
-                </a>
-            </li>
+            @if(auth()->user()->hasPermission('categories_read'))
+                <li class=" nav-item">
+                    <a href="{{ route('categories.index') }}">
+                        <i class="icon-drawer"></i>
+                        <span class="menu-title" data-i18n="Dashboard">الاقسام</span>
+                    </a>
+                </li>
+            @endif
             <!-- End Category -->
 
             <!-- Start Project -->
-            <li class=" nav-item">
-                <a href="{{ route('projects.index') }}">
-                    <i class="icon-puzzle"></i>
-                    <span class="menu-title" data-i18n="Dashboard">المشاريع</span>
-                </a>
-            </li>
+            @if(auth()->user()->hasPermission('projects_read'))
+                <li class=" nav-item">
+                    <a href="{{ route('projects.index') }}">
+                        <i class="icon-puzzle"></i>
+                        <span class="menu-title" data-i18n="Dashboard">المشاريع</span>
+                    </a>
+                </li>
+            @endif
             <!-- End Project -->
         </ul>
     </div>

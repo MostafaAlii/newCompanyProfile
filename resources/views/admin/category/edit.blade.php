@@ -23,7 +23,7 @@
                     <li class="breadcrumb-item"><a href="{{ route('categories.index') }}">الاقســـام</a></li>
                     <li class="breadcrumb-item">
                         <a href="#">
-
+                            تعديل / {{ $category->name }}
                         </a>
                     </li>
                 </ol>

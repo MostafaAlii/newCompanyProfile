@@ -70,48 +70,95 @@ class ProjectController extends Controller {
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function edit(Project $project) {
+        $categories = Category::whereStatus(1)->get(['id','name']);
+        return view('admin.project.edit', compact('project', 'categories'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    public function update(ProjectRequest $request, Project $project) {
+        try{
+            $input['name'] = $request->name;
+            $input['status'] = $request->status;
+            $input['description'] = $request->description;
+            $input['link'] = $request->link;
+            $input['category_id'] = $request->category_id;
+            $project->update($input);
+            // images
+            if($request->images && count($request->images) > 0) {
+                $i = $project->media()->count() + 1;
+                foreach($request->images as $image) {
+                    $file_name = $project->slug . '_' . time() . '_' . $i . '.' . $image->getClientOriginalExtension();
+                    $file_size = $image->getSize();
+                    $file_type = $image->getMimeType();
+                    $path = public_path('images/projects/' . $file_name);
+                    Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })->save($path, 100);
+    
+                    $project->media()->create([
+                        'file_name' => $file_name,
+                        'file_size' => $file_size,
+                        'file_type' => $file_type,
+                        'file_status' => true,
+                        'file_sort' => $i,
+                    ]);
+                    $i++;
+                }
+            }
+            return redirect()->route('projects.index')->with([
+                'message' => 'تم تحديث المشروع بنجاح',
+                'alert-type' => 'success'
+            ]);
+        } catch(\Exception $ex) {
+            return redirect()->route('projects.index')->with([
+                'message' => 'عفواً حدث خطأ ما',
+                'alert-type' => 'danger'
+            ]);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+    public function destroy(Project $project) {
+        try {
+            if($project->media()->count() > 0) {
+                foreach($project->media as $media) {
+                    $path = public_path('images/projects/' . $media->file_name);
+                    if(File::exists($path)) {
+                        unlink($path);
+                    }
+                    $media->delete();
+                }
+            }
+            $project->delete();
+            return redirect()->route('projects.index')->with([
+                'message' => 'تم حذف المشروع بنجاح',
+                'alert-type' => 'success'
+            ]);
+        } catch(\Exception $ex) {
+            return redirect()->route('projects.index')->with([
+                'message' => 'عفواً حدث خطأ ما',
+                'alert-type' => 'danger'
+            ]);
+        }  
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function deleteMedia(Request $request) {
+        try {
+            $media = $request->media;
+            $project = Project::findOrFail($request->project_id);
+            $imgFileName = $project->media()->whereId($media)->first();
+            if(File::exists(public_path('images/projects/' . $imgFileName->file_name))) {
+                unlink(public_path('images/projects/' . $imgFileName->file_name));
+            }
+            $imgFileName->delete();
+            return response()->json([
+                'message' => 'تم حذف الصورة بنجاح',
+                'alert-type' => 'success'
+            ]);
+        } catch(\Exception $ex) {
+            return response()->json([
+                'message' => 'عفواً حدث خطأ ما',
+                'alert-type' => 'danger'
+            ]);
+        }
     }
 }
