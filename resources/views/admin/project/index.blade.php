@@ -70,7 +70,7 @@
                                 @endif
                             </td>
                             <td>{{$project->status() }}</td>
-                            <td>{{$project->category->pluck('name')->join(', ') }}</td>
+                            <td>{{$project->category->name }}</td>
                             <td>{{$project->created_at }}</td>
                             <td>
                                 <div class="btn-group">

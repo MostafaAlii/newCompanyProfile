@@ -80,6 +80,37 @@
 <script src="{{ asset('app-assets/js/scripts/pages/material-app.js') }}"></script>
 <script src="{{ asset('app-assets/js/scripts/pages/dashboard-sales.js') }}"></script>
 <script src="{{ asset('app-assets/js/customFun.js') }}"></script>
+
+<script>
+    $(function(){
+        // Categories Select
+        $(".select2").select2({});
+        // Product Image
+        $('#project-images').fileinput({
+        theme: "fas",
+            maxFileCount: 3,
+            allowedFileTypes: ['image'],
+            showCancel: true,
+            showRemove: false,
+            showUpload: false,
+            overwriteInitial: false
+        });
+
+        $('.summernote').summernote({
+            tabSize: 2,
+            height: 200,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+        })
+    });
+</script>
 <!-- END: Page JS-->
 @yield('js')
 </body>

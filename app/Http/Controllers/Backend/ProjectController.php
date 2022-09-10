@@ -1,8 +1,12 @@
 <?php
 namespace App\Http\Controllers\Backend;
-use App\Http\Controllers\Controller;
-use App\Models\{Category, Project};
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\{Category, Project};
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Backend\ProjectRequest;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image;
 class ProjectController extends Controller {
     public function index() {
         $projects = Project::with('category', 'firstMedia')
@@ -22,8 +26,48 @@ class ProjectController extends Controller {
         return view('admin.project.create', compact('categories'));
     }
 
-    public function store(Request $request) {
-        //
+    public function store(ProjectRequest $request) {
+        try {
+            //DB::beginTransactions();
+            $input['name'] = $request->name;
+            $input['status'] = $request->status;
+            $input['description'] = $request->description;
+            $input['link'] = $request->link;
+            $input['category_id'] = $request->category_id;
+            $project = Project::create($input);
+            if($request->images && count($request->images) > 0) {
+                $i = 1;
+                foreach($request->images as $image) {
+                    $file_name = $project->slug . '_' . time() . '_' . $i . '.' . $image->getClientOriginalExtension();
+                    $file_size = $image->getSize();
+                    $file_type = $image->getMimeType();
+                    $path = public_path('images/projects/' . $file_name);
+                    Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })->save($path, 100);
+    
+                    $project->media()->create([
+                        'file_name' => $file_name,
+                        'file_size' => $file_size,
+                        'file_type' => $file_type,
+                        'file_status' => true,
+                        'file_sort' => $i,
+                    ]);
+                    $i++;
+                }
+            }
+            //DB::commit();
+            return redirect()->route('projects.index')->with([
+                'message' => 'تم اضافة المشروع بنجاح',
+                'alert-type' => 'success'
+            ]);
+        } catch(\Exception $ex) {
+            //DB::rollBack();
+            return redirect()->route('projects.index')->with([
+                'message' => 'عفواً حدث خطأ ما',
+                'alert-type' => 'danger'
+            ]);
+        }
     }
 
     /**

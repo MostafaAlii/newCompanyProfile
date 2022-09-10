@@ -9,6 +9,7 @@ return new class extends Migration {
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
+            $table->string('link')->nullable();
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->boolean('status')->default(false);
             $table->softDeletes();

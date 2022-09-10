@@ -6,6 +6,8 @@
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/forms/selects/select2.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/bootstrap-fileinput/fileinput-rtl.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/summernote/summernote-bs4.css') }}">
 @endsection
 
 @section('content')
@@ -46,18 +48,17 @@
                 </div>
                 <!-- End Name -->
 
-                <!-- Start Status -->
-                <div class="col-3">
-                    <label for="status">حالة المشروع</label>
-                    <select name="status" class="form-control">
-                        <option value="1" {{ old('status') == 1 ? 'selected' : null }}>فعــال</option>
-                        <option value="0" {{ old('status') == 0 ? 'selected' : null }}>غير فعــال</option>
-                    </select>
-                    @error('status')
+                <!-- Start Name -->
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="link">رابط المشروع</label>
+                        <input name="link" class="form-control" value="{{ old('link') }}" type="text" placeholder="اكتب رابط المشروع">
+                        @error('link')
                             <span class="text-danger">{{$message}}</span>
                         @enderror
+                    </div>
                 </div>
-                <!-- End Status -->
+                <!-- End Name -->
             </div>
 
             <div class=row>
@@ -77,6 +78,19 @@
                     @enderror
                 </div>
                 <!-- End Category -->
+
+                <!-- Start Status -->
+                <div class="col-3">
+                    <label for="status">حالة المشروع</label>
+                    <select name="status" class="form-control">
+                        <option value="1" {{ old('status') == 1 ? 'selected' : null }}>فعــال</option>
+                        <option value="0" {{ old('status') == 0 ? 'selected' : null }}>غير فعــال</option>
+                    </select>
+                    @error('status')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
+                </div>
+                <!-- End Status -->
             </div>
 
             <br>
@@ -85,7 +99,7 @@
                 <div class="col-12">
                     <div class="form-group">
                         <label for="description">وصف المشروع</label>
-                        <textarea name="description" class="form-control" rows="3">
+                        <textarea name="description" class="summernote form-control" rows="3">
                             {{ old('description') }}
                         </textarea>
                     </div>
@@ -99,7 +113,7 @@
                         <label for="images">الصور</label>
                         <br>
                         <div class="file-loading">
-                            <input type="file" name="images[]" id="project-images" class="file-input-overview" multiple="multiple">
+                            <input type="file" name="images[]" id="" class="" multiple="multiple">
                             @error('images')<span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                     </div>
@@ -117,39 +131,12 @@
 
 @section('js')
 <script src="{{ asset('app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
-<script>
+<script src="{{ asset('app-assets/vendors/bootstrap-fileinput/js/locales/ar.js') }}"></script>
+<script src="{{ asset('app-assets/vendors/bootstrap-fileinput/js/plugins/piexif.min.js') }}"></script>
+<script src="{{ asset('app-assets/vendors/bootstrap-fileinput/js/plugins/sortable.min.js') }}"></script>
+<script src="{{ asset('app-assets/vendors/bootstrap-fileinput/js/fileinput.min.js') }}"></script>
+<script src="{{ asset('app-assets/vendors/bootstrap-fileinput/themes/fas/theme.min.js') }}"></script>
+<script src="{{ asset('app-assets/vendors/summernote/summernote.bs4.min.js') }}"></script>
 
-</script>
-<script>
-    $(function(){
-        // Categories Select
-        $(".select2").select2({
-            
-        });
-        // Product Image
-        $('#project-images').fileinput({
-            theme: "fas",
-                maxFileCount: 5,
-                allowedFileTypes: ['image'],
-                showCancel: true,
-                showRemove: false,
-                showUpload: false,
-                overwriteInitial: false
-            });
 
-            $('.summernote').summernote({
-                tabSize: 2,
-                height: 200,
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
-                ]
-            })
-    });
-</script>
 @endsection
