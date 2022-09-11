@@ -213,6 +213,7 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'User' => App\Models\User::class,
+        'Partner' => App\Models\Partner::class,
         'Category'=>App\Models\Category::class,
         'Product'=>App\Models\Product::class,
     ])->toArray(),

@@ -13,10 +13,13 @@ class UserController extends Controller {
         $this->middleware('permission:users_update', ['only' => ['edit']]);
         $this->middleware('permission:users_delete', ['only' => ['destroy']]);
     }
+
     public function index(Request $request) {
-        $users = User::whereRoleIs('admin')->when($request->search, function ($q) use ($request) {
+        $users = User::whereRoleIs('admin')->where(function($query) use ($request){
+            return $query->when($request->search, function($q) use ($request){
                 return $q->where('name', 'like', '%' . $request->search . '%')
                     ->orWhere('email', 'like', '%' . $request->search . '%');
+            });
         })->latest()->paginate(10);
         return view('admin.user.index', compact('users'));
     }

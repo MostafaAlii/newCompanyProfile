@@ -20,6 +20,7 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', Backend\DashboardController::class)->name('dashboard');
     Route::resource('users', Backend\UserController::class);
+    Route::resource('partners', Backend\PartnerController::class);
     Route::resource('categories', Backend\CategoryController::class);
     Route::resource('projects', Backend\ProjectController::class);
 });

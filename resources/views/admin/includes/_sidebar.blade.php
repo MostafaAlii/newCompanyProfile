@@ -46,6 +46,18 @@
             @endif
             <!-- End Users -->
 
+            <!-- Start Partners -->
+            @if(auth()->user()->hasPermission('partners_read'))
+                <li class=" nav-item">
+                    <a href="{{ route('partners.index') }}">
+                        <i class="icon-energy"></i>
+                        <span class="menu-title" data-i18n="Category">الشركاء</span>
+                        <span class="badge badge-success round"> {{ Partner::count() }} </span>
+                    </a>
+                </li>
+            @endif
+            <!-- End Partners -->
+
             <!-- Start Category -->
             @if(auth()->user()->hasPermission('categories_read'))
                 <li class=" nav-item">

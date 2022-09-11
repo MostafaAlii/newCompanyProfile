@@ -9,6 +9,7 @@ class DatabaseSeeder extends Seeder {
             UserTableSeeder::class,
             CategorySeeder::class,
             ProjectSeeder::class,
+            PartnerTableSeeder::class,
         ]);
     }
 }
