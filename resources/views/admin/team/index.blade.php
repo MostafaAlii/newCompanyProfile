@@ -1,7 +1,7 @@
 @extends('admin.admin_master')
 
 @section('pageTitle')
-الشركاء
+المستخدمين
 @endsection
 
 @section('css')
@@ -13,16 +13,17 @@
 <div class="content-header row">
     <div class="content-header-left col-md-6 col-12 mb-2">
         <h3 class="content-header-title">
-            <i class="icon-energy"></i>
-            الشركاء
+            <i class="icon-user-following"></i>
+            المستخدمين
+            
         </h3>
         <div class="row breadcrumbs-top">
             <div class="breadcrumb-wrapper col-12">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">لوحة التحكم</a></li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('partners.index') }}">  الشركاء</a>
-                        <span class="badge badge-success round"> {{ $partners->total() }} </span>
+                        <a href="{{ route('users.index') }}">  المستخدمين</a>
+                        <span class="badge badge-success round"> {{ $users->total() }} </span>
                     </li>
                 </ol>
             </div>
@@ -37,19 +38,19 @@
             <!-- Start Create User btn -->
             <div class="col-4">
                 <div class="ml-auto">
-                    @if(auth()->user()->hasPermission('partners_create'))
-                        <a href="{{ route('partners.create') }}" class="btn btn-primary">
+                    @if(auth()->user()->hasPermission('users_create'))
+                        <a href="{{ route('users.create') }}" class="btn btn-primary">
                             <span class="icon text-white-50">
-                                <i class="la la-plus"></i>
+                                <i class="icon-user-follow"></i>
                             </span>
-                            <span class="text">اضافة شريك جديد</span>
+                            <span class="text">اضافة مستخدم جديد</span>
                         </a>
                     @else
                         <a href="#" class="btn btn-primary disabled">
                             <span class="icon text-white-50">
-                                <i class="la-plus"></i>
+                                <i class="icon-user-follow"></i>
                             </span>
-                            <span class="text">اضافة شريك جديد</span>
+                            <span class="text">اضافة مستخدم جديد</span>
                         </a>
                     @endif
                 </div>
@@ -57,9 +58,9 @@
             <!-- End Create User btn -->
             <!-- Start Search -->
             <div class="col-8">
-                <form action="{{ route('partners.index') }}" method="GET">
+                <form action="{{ route('users.index') }}" method="GET">
                     <div class="input-group">
-                        <input type="text" name="search" class="form-control" placeholder="ابحث بالاســـم " value="{{ request()->search }}">
+                        <input type="text" name="search" class="form-control" placeholder="ابحث عن مستخدم" value="{{ request()->search }}">
                         <div class="input-group-append">
                             <button class="btn btn-light" type="submit">
                                 <i class="icon-magnifier"></i>
@@ -80,37 +81,29 @@
                         <th>#</th>
                         <th>الاسم</th>
                         <th>الصورة</th>
-                        <th>الحالة</th>
-                        <th>الرابط</th>
+                        <th>البريد الالكترونى</th>
                         <th>تاريخ الاضافة</th>
                         <th class="text-center" style="width: 30px;">العمليات</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($partners as $index=>$partner)
+                    @forelse($users as $index=>$user)
                         <tr>
                             <td>{{ $index + 1 }}</td>
-                            <td>{{$partner->name }}</td>
+                            <td>{{$user->name }}</td>
                             <td>
-                                @if($partner->image_path)
-                                    <img src="{{ $partner->image_path }}" style="width: 50px; height: 50px;" class="img-thumbnail" alt="{{$partner->name }}">
+                                @if($user->image_path)
+                                    <img src="{{ $user->image_path }}" style="width: 50px; height: 50px;" class="img-thumbnail" alt="{{$user->name }}">
                                 @else
-                                    <img src="{{ asset('uploads/partner_images/default.png') }}" style="width: 50px; height: 50px;" class="img-thumbnail" alt="{{$partner->name }}">
+                                    <img src="{{ asset('uploads/user_images/default.png') }}" style="width: 50px; height: 50px;" class="img-thumbnail" alt="{{$user->name }}">
                                 @endif
                             </td>
-                            <td>
-                                @if($partner->status == 1)
-                                    <span class="badge badge-success">مفعل</span>
-                                @else
-                                    <span class="badge badge-danger">غير مفعل</span>
-                                @endif
-                            </td>
-                            <td><a href="{{$partner->link }}" target="_blank">اضغط لمعاينة الرابط</a></td>
-                            <td>{{$partner->created_at->diffForhumans() }}</td>
+                            <td>{{$user->email }}</td>
+                            <td>{{$user->created_at->diffForhumans() }}</td>
                             <td>
                                 <div class="btn-group">
-                                    @if(auth()->user()->hasPermission('partners_update'))
-                                    <a href="{{ route('partners.edit', $partner->id) }}" class="btn btn-primary btn-sm">
+                                    @if(auth()->user()->hasPermission('users_update'))
+                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-sm">
                                         <i class="material-icons">edit</i>
                                     </a>
                                     @else
@@ -118,8 +111,8 @@
                                             <i class="material-icons">edit</i>
                                         </a>
                                     @endif
-                                    @if(auth()->user()->hasPermission('partners_delete'))
-                                        <form action="{{ route('partners.destroy', $partner->id) }}" method="POST" id="delete-user-{{$partner->id}}">
+                                    @if(auth()->user()->hasPermission('users_delete'))
+                                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" id="delete-user-{{$user->id}}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm"><i class="ft ft-trash-2"></i></button>
@@ -133,7 +126,7 @@
                     @empty
                         <tr>
                             <td colspan="6" class="text-center text-danger">
-                                عفوا لا يوجد شركاء حاليا قم باضافة بعض الشركاء !!
+                                عفوا لا توجد مستخدمين حاليا قم باضافة بعض ال !!
                             </td>
                         </tr>
                     @endforelse
@@ -142,7 +135,7 @@
                     <tr>
                         <td colspan="6">
                             <div class="float-right">
-                                {!! $partners->appends(request()->query())->links() !!}
+                                {!! $teams->appends(request()->query())->links() !!}
                             </div>
                         </td>
                     </tr>

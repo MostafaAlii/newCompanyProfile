@@ -5,16 +5,12 @@ use App\Http\Requests\Backend\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 class CategoryController extends Controller {
-    public function index() {
-        $categories = Category::withCount('projects')
-        ->when(request()->keyword != null, function ($query){
-            $query->search(request()->keyword);
-        })
-        ->when(request()->status != null, function ($query){
-            $query->whereStatus(request()->status);
-        })
-        ->orderBy(request()->sort_by ?? 'id', request()->order_by ?? 'desc')
-        ->paginate(request()->limit_by ?? 10);
+    public function index(Request $request) {
+        $categories = Category::where(function($query) use ($request){
+            return $query->when($request->search, function($q) use ($request){
+                return $q->where('name', 'like', '%' . $request->search . '%');
+            });
+        })->latest()->paginate(10);
         return view('admin.category.index', compact('categories'));
     }
 

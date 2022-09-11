@@ -215,7 +215,7 @@ return [
         'User' => App\Models\User::class,
         'Partner' => App\Models\Partner::class,
         'Category'=>App\Models\Category::class,
-        'Product'=>App\Models\Product::class,
+        'Project'=>App\Models\Project::class,
     ])->toArray(),
 
 ];

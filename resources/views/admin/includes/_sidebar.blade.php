@@ -64,6 +64,7 @@
                     <a href="{{ route('categories.index') }}">
                         <i class="icon-drawer"></i>
                         <span class="menu-title" data-i18n="Dashboard">الاقسام</span>
+                        <span class="badge badge-success round"> {{ Category::count() }} </span>
                     </a>
                 </li>
             @endif
@@ -75,6 +76,7 @@
                     <a href="{{ route('projects.index') }}">
                         <i class="icon-puzzle"></i>
                         <span class="menu-title" data-i18n="Dashboard">المشاريع</span>
+                        <span class="badge badge-success round"> {{ Project::count() }} </span>
                     </a>
                 </li>
             @endif

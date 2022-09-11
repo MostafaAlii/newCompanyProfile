@@ -8,16 +8,12 @@ use App\Http\Requests\Backend\ProjectRequest;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 class ProjectController extends Controller {
-    public function index() {
-        $projects = Project::with('category', 'firstMedia')
-        ->when(request()->keyword != null, function ($query){
-            $query->search(request()->keyword);
-        })
-        ->when(request()->status != null, function ($query){
-            $query->whereStatus(request()->status);
-        })
-        ->orderBy(request()->sort_by ?? 'id', request()->order_by ?? 'desc')
-        ->paginate(request()->limit_by ?? 10);
+    public function index(Request $request) {
+        $projects = Project::where(function($query) use ($request){
+            return $query->when($request->search, function($q) use ($request){
+                return $q->where('name', 'like', '%' . $request->search . '%');
+            });
+        })->latest()->paginate(10);
         return view('admin.project.index', compact('projects'));
     }
 

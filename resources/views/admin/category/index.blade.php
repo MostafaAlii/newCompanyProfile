@@ -31,7 +31,7 @@
     <div class="content-body">
         <!-- Start Create btn row -->
         <div class="row">
-            <div class="col-12">
+            <div class="col-4">
                 <div class="ml-auto">
                     <a href="{{ route('categories.create') }}" class="btn btn-primary">
                         <span class="icon text-white-50">
@@ -41,10 +41,10 @@
                     </a>
                 </div>
             </div>
+            @include('admin.category.filter.filter')
         </div>
         <!-- End Create btn row -->
         <hr>
-        @include('admin.category.filter.filter')
         <!-- Start Table -->
         <div class="table-responsive">
             <table class="table table-hover">
