@@ -34,6 +34,45 @@
             </li>
             <!-- End Dashboard -->
 
+            <!-- Start Settings Menu -->
+            {{--@if(auth()->user()->hasPermission('settings_read'))--}}
+                <li class=" nav-item">
+                    <a href="#">
+                        <i class="icon-wrench"></i>
+                        <span class="menu-title" data-i18n="Menu levels">الاعدادات و الصفحات</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a class="menu-item" href="#">
+                                <i class="icon-settings mr-1"></i>
+                                <span data-i18n="Second level">الاعدادات العامة</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="#">
+                                <i class="icon-docs mr-1"></i>
+                                <span>الصفحات</span>
+                            </a>
+                            <ul class="menu-content">
+                                <li>
+                                    <a class="menu-item" href="#">
+                                        <i class="icon-info mr-1"></i>
+                                        <span data-i18n="Third level">من نحن</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="menu-item" href="#">
+                                        <i class="icon-call-end mr-1"></i>
+                                        <span data-i18n="Third level">اتصل بنا</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            {{--@endif--}}
+            <!-- End Settings Menu -->
+
             <!-- Start Users -->
             @if(auth()->user()->hasPermission('users_read'))
                 <li class=" nav-item">
