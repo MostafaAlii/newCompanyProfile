@@ -15,12 +15,16 @@
         <h3 class="content-header-title">
             <i class="icon-user-following"></i>
             المستخدمين
+            
         </h3>
         <div class="row breadcrumbs-top">
             <div class="breadcrumb-wrapper col-12">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">لوحة التحكم</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('users.index') }}">  المستخدمين</a> <small> {{ $users->total() }} </small></li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('users.index') }}">  المستخدمين</a>
+                        <span class="badge badge-success round"> {{ $users->total() }} </span>
+                    </li>
                 </ol>
             </div>
         </div>
@@ -74,16 +78,26 @@
             <table class="table table-hover">
                  <thead>
                     <tr>
+                        <th>#</th>
                         <th>الاسم</th>
+                        <th>الصورة</th>
                         <th>البريد الالكترونى</th>
                         <th>تاريخ الاضافة</th>
                         <th class="text-center" style="width: 30px;">العمليات</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($users as $user)
+                    @forelse($users as $index=>$user)
                         <tr>
+                            <td>{{ $index + 1 }}</td>
                             <td>{{$user->name }}</td>
+                            <td>
+                                @if($user->image_path)
+                                    <img src="{{ $user->image_path }}" style="width: 50px; height: 50px;" class="img-thumbnail" alt="{{$user->name }}">
+                                @else
+                                    <img src="{{ asset('uploads/user_images/default.png') }}" style="width: 50px; height: 50px;" class="img-thumbnail" alt="{{$user->name }}">
+                                @endif
+                            </td>
                             <td>{{$user->email }}</td>
                             <td>{{$user->created_at->diffForhumans() }}</td>
                             <td>

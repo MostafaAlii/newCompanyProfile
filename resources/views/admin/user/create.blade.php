@@ -30,9 +30,11 @@
 <!-- End Breadcrumbs -->
 <div class="content-wrapper">
     <div class="content-body">
+        @include('admin.includes._partials._errors')
         <!-- Start Create User Form -->
         <form action="{{ route('users.store') }}" method="post" enctype="multipart/form-data">
             @csrf
+            <!-- Start Name & Email -->
             <div class="row">
                 <!-- Start Name -->
                 <div class="col-12 col-md-6">
@@ -57,7 +59,9 @@
                 </div>
                 <!-- End Email -->
             </div>
+            <!-- End Name & Email -->
 
+            <!-- Start Password & Password Confirmation -->
             <div class="row">
                 <!-- Start Password -->
                 <div class="col-12 col-md-6">
@@ -82,7 +86,31 @@
                 </div>
                 <!-- End Password Confirmation -->
             </div>
+            <!-- End Password & Password Confirmation -->
 
+            <!-- Start Image & Image Prview -->
+            <div class="row">
+                <!-- Start Image -->
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="image">الصورة</label>
+                        <input type="file" name="image" id="image" class="form-control image">
+                        @error('image')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <!-- End Image -->
+                <!-- Start Image Preview -->
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <img src="{{ asset('uploads/user_images/default.png') }}"  style="width: 100px" class="img-thumbnail image-preview" alt="">
+                    </div>
+                </div>
+            </div>
+            <!-- End Image & Image Prview -->
+
+            <!-- Start Permissions -->
             <div class="col-12 col-md-8">
                 <lable>الصلاحيات</lable>
                 <div class="form-group pt-1">
@@ -103,7 +131,8 @@
                             <div aria-labelledby="{{$model}}-tab" class="tab-pane {{ $index == 0 ? 'active' : '' }}" id="{{$model}}" role="tabpanel">
                                 @foreach($maps as $map)
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="permissions[]" value="{{ $model . '_' . $map }}"> @lang('permission.' . $map)
+                                        <input type="checkbox" name="permissions[]" value="{{ $model . '_' . $map }}">
+                                        {{trans('permission.' . $map) . ' ' . trans('permission.' . $model)}}
                                     </label>
                                 @endforeach
                             </div>
@@ -112,6 +141,7 @@
                     @endforeach
                 </div>
             </div>
+            <!-- End Permissions -->
 
             <div class="form-group pt-2 text-center">
                 <button type="submit" name="submit" class="btn btn-primary">اضافة مستخدم</button>
@@ -123,5 +153,16 @@
 @endsection
 
 @section('js')
-
+<script>
+    // image preview
+    $(".image").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('.image-preview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+</script>
 @endsection

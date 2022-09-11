@@ -212,6 +212,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'User' => App\Models\User::class,
         'Category'=>App\Models\Category::class,
         'Product'=>App\Models\Product::class,
     ])->toArray(),

@@ -63,6 +63,26 @@
                 <!-- End Email -->
             </div>
 
+            <div class="row">
+                <!-- Start Image -->
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="image">الصورة</label>
+                        <input type="file" name="image" id="image" class="form-control image">
+                        @error('image')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <!-- End Image -->
+                <!-- Start Image Preview -->
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <img src="{{ $user->image_path }}"  style="width: 100px" class="img-thumbnail image-preview" alt="{{$user->name}}">
+                    </div>
+                </div>
+            </div>
+
             <div class="col-12 col-md-8">
                 <lable>الصلاحيات</lable>
                 <div class="form-group pt-1">
@@ -83,7 +103,8 @@
                             <div aria-labelledby="{{$model}}-tab" class="tab-pane {{ $index == 0 ? 'active' : '' }}" id="{{$model}}" role="tabpanel">
                                 @foreach($maps as $map)
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" {{ $user->hasPermission($model . '_' . $map) ? 'checked' : '' }} name="permissions[]" value="{{ $model . '_' . $map }}"> @lang('permission.' . $map)
+                                        <input type="checkbox" {{ $user->hasPermission($model . '_' . $map) ? 'checked' : '' }} name="permissions[]" value="{{ $model . '_' . $map }}">
+                                        {{trans('permission.' . $map) . ' ' . trans('permission.' . $model)}}
                                     </label>
                                 @endforeach
                             </div>

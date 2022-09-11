@@ -1,7 +1,7 @@
 <div class="main-menu material-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="user-profile">
         <div class="user-info text-center pb-2">
-            <img class="user-img img-fluid rounded-circle w-25 mt-2" src="{{ asset('app-assets/images/portrait/small/avatar-s-1.png') }}" alt="" />
+            <img class="user-img img-fluid rounded-circle w-25 mt-2" src="{{ auth()->user()->image_path  }}" alt="{{ auth()->user()->name }}" />
             <div class="name-wrapper d-block dropdown mt-1">
                 <a class="white dropdown-toggle" id="user-account" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="user-name">{{ auth()->user()->name }}</span>
@@ -40,6 +40,7 @@
                     <a href="{{ route('users.index') }}">
                         <i class="icon-user-following"></i>
                         <span class="menu-title" data-i18n="Category">المستخدمين</span>
+                        <span class="badge badge-success round"> {{ User::count() }} </span>
                     </a>
                 </li>
             @endif
