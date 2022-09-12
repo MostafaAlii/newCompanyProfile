@@ -43,7 +43,7 @@
                     </a>
                     <ul class="menu-content">
                         <li>
-                            <a class="menu-item" href="#">
+                            <a class="menu-item" href="{{ route('settings.index') }}">
                                 <i class="icon-settings mr-1"></i>
                                 <span data-i18n="Second level">الاعدادات العامة</span>
                             </a>

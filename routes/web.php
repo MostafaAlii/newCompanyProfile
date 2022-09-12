@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('partners', Backend\PartnerController::class);
     Route::resource('categories', Backend\CategoryController::class);
     Route::resource('projects', Backend\ProjectController::class);
+    Route::resource('settings', Backend\SettingController::class);
 });
 
 require __DIR__.'/auth.php';
