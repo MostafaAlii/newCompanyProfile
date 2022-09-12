@@ -1,0 +1,74 @@
+/* Start Media Query: 0px - 1170px */
+@media (max-width:1199.5px) {
+    /* paralex */
+
+    /* process */
+
+    /* contact page */
+}
+/* End Media Query: 0px - 1170px */
+
+/* Start Media Query: 0px - 991.5px */
+@media (max-width:991.5px) {
+    /* navbar */
+    .header .navbar-collapse{
+        padding: 2rem;
+    }
+    .header .navbar-nav .navbar-link{
+        padding: 0.7rem 0.6rem;
+        margin-bottom: 2rem;
+    }
+    /* banner */
+    .banner-wrapper{
+        margin-top: 4rem;
+        padding: 4rem 2rem;
+        min-height: 730px;
+    }
+    /* card */
+
+    /* paralex css */
+
+    /* contact page */
+}
+/* End Media Query: 0px - 991.5px */
+
+/* Start Media Query: 0px - 767.5px */
+@media (max-width:767.5px) {
+    /* general css */
+    body,html{
+        font-size: 8px;
+    }
+    /* banner */
+    .banner-wrapper{
+        min-width: 550px;
+    }
+    /* card */
+
+    /* paralex css */
+
+    /* contact page */
+}
+/* End Media Query: 0px - 767.5px */
+
+/* Start Media Query: 0px - 590px */
+@media (max-width:590px) {
+    /* general css */
+    body, html{
+        font-size: 7px;
+    }
+    /* footer */
+}
+/* End Media Query: 0px - 590px */
+
+/* Start Media Query: 0px - 390px */
+@media (max-width:390px) {
+    /* general css */
+    h1{
+        font-size: 27px;
+    }
+    h2{
+        font-size: 25px;
+    }
+    /* footer */
+}
+/* End Media Query: 0px - 390px */

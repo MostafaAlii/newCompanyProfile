@@ -3,11 +3,12 @@
     <!-- Start header top -->
     <div class="header fixed-top">
         <!-- Start container -->
-        <div class="container-fluid">
+        <div class="container">
             <!-- Start Nav -->
             <nav class="navbar navbar-expand-lg">
                 <a class="navbar-brand" href="{{route('home') }}">
                     <img src="{{ URL::asset('uploads/setting_images/'.$setting['site_logo']) }}" width="10%" height="10%" class="img-fluid" alt="{{ $setting['site_logo'] }}">
+                     {{$setting['site_name']}}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-stream navbar-toggler-icon"></i>
