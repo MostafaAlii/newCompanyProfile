@@ -1,5 +1,5 @@
 <?php
-use App\Http\Controllers\Backend;
+use App\Http\Controllers\Frontend;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,18 +12,4 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', Backend\DashboardController::class)->name('dashboard');
-    Route::resource('users', Backend\UserController::class);
-    Route::resource('partners', Backend\PartnerController::class);
-    Route::resource('categories', Backend\CategoryController::class);
-    Route::resource('projects', Backend\ProjectController::class);
-    Route::resource('settings', Backend\SettingController::class);
-});
-
-require __DIR__.'/auth.php';
+Route::get('/', Frontend\WebsiteController::class)->name('home');

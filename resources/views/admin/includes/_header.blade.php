@@ -4,8 +4,9 @@
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
                 <li class="nav-item mobile-menu d-lg-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
-                <li class="nav-item mr-auto"><a class="navbar-brand" href="index.html"><img class="brand-logo" alt="modern admin logo" src="{{ asset('app-assets/images/logo/logo.png') }}">
-                        <h3 class="brand-text">Modern</h3>
+                <li class="nav-item mr-auto"><a class="navbar-brand" href="{{route('dashboard')}}">
+                    <img class="brand-logo" alt="{{$setting['site_name']}}" src="{{ URL::asset('uploads/setting_images/'.$setting['site_logo']) }}">
+                        <h3 class="brand-text">{{$setting['site_name']}}</h3>
                     </a></li>
                 <li class="nav-item d-none d-lg-block nav-toggle">
                     <a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse">
