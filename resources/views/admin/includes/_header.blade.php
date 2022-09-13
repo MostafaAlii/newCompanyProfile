@@ -29,8 +29,13 @@
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="user-profile.html">
-                                <i class="material-icons">person_outline</i> الصفحة الشخصية
+                            <a class="dropdown-item" href="#">
+                                <i class="material-icons">person_outline</i>
+                                الصفحة الشخصية
+                            </a>
+                            <a class="dropdown-item" href="{{route('home') }}" target="_blank">
+                                <i class="material-icons">language</i>
+                                الموقع
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('log-out').submit();">

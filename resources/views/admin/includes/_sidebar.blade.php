@@ -55,15 +55,11 @@
                             </a>
                             <ul class="menu-content">
                                 <li>
-                                    <a class="menu-item" href="#">
-                                        <i class="icon-info mr-1"></i>
-                                        <span data-i18n="Third level">من نحن</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="menu-item" href="#">
-                                        <i class="icon-call-end mr-1"></i>
-                                        <span data-i18n="Third level">اتصل بنا</span>
+                                    <a class="menu-item" href="{{ route('pages.index') }}">
+                                        <i class="icon-docs mr-1"></i>
+                                        <span data-i18n="Third level"> الصفحات</span>
+                                        <span style="width: 25px;"></span>
+                                        <span class="badge badge-primary round"> {{ Page::count() }} </span>
                                     </a>
                                 </li>
                             </ul>

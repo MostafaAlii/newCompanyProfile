@@ -216,6 +216,7 @@ return [
         'Partner' => App\Models\Partner::class,
         'Category'=>App\Models\Category::class,
         'Project'=>App\Models\Project::class,
+        'Page'=>App\Models\Page::class,
     ])->toArray(),
 
 ];

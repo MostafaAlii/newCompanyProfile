@@ -1,10 +1,8 @@
 <?php
-
 namespace App\Providers;
-
+use App\Models\Setting;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
-
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -24,5 +22,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot() {
         Paginator::useBootstrapFive();
+        view()->composer('*', function ($view) {
+            $collection = Setting::all();
+            $setting['setting'] = $collection->flatMap(function ($collection) {
+                return [$collection->key => $collection->value];
+            });
+            $view->with($setting);
+        });
     }
 }
