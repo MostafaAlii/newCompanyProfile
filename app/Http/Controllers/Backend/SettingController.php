@@ -27,7 +27,7 @@ class SettingController extends Controller {
 
     public function update(Request $request) {
         try{
-            $info = $request->except('_token', '_method', 'site_logo', 'site_favicon', 'site_home_banner');
+            $info = $request->except('_token', '_method', 'site_logo', 'site_favicon');
             foreach ($info as $key=> $value){
                 Setting::where('key', $key)->update(['value' => $value]);
             }
@@ -42,12 +42,6 @@ class SettingController extends Controller {
                 $file_name = md5($file->getClientOriginalName() . time()) . '_favicon.' . $file->getClientOriginalExtension();
                 $file->move(public_path('uploads/setting_images'), $file_name);
                 Setting::where('key', 'site_favicon')->update(['value' => $file_name]);
-            }
-            if($request->hasFile('site_home_banner')){
-                $file = $request->file('site_home_banner');
-                $file_name = md5($file->getClientOriginalName() . time()) . '_home_banner.' . $file->getClientOriginalExtension();
-                $file->move(public_path('uploads/setting_images'), $file_name);
-                Setting::where('key', 'site_home_banner')->update(['value' => $file_name]);
             }
             return redirect()->route('settings.index')->with([
                 'message' => 'تم تحديث الاعدادات بنجاح',

@@ -22,6 +22,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::resource('projects', Backend\ProjectController::class);
     Route::resource('settings', Backend\SettingController::class);
     Route::resource('pages', Backend\PagesController::class);
+    Route::resource('menus', Backend\MenuController::class);
 });
 
 require __DIR__.'/auth.php';

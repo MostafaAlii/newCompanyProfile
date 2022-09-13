@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder {
             CategorySeeder::class,
             ProjectSeeder::class,
             PartnerTableSeeder::class,
+            MenuSeeder::class,
         ]);
     }
 }

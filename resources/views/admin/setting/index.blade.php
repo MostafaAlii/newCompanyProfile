@@ -122,7 +122,7 @@
 
             <div class="row">
                 <!-- Start Site Logo -->
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="site_logo">شعار الموقع</label>
                         <input type="file" name="site_logo" id="site_logo" class="form-control site_logo_image">
@@ -133,7 +133,7 @@
                 </div>
                 <!-- End Site Logo -->
                 <!-- Start Site Icon -->
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="site_favicon">ايقونة الموقع</label>
                         <input type="file" name="site_favicon" id="site_favicon" class="form-control site_favicon_image">
@@ -143,35 +143,18 @@
                     </div>
                 </div>
                 <!-- End Site Icon -->
-                <!-- Start Site Home Banner -->
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label for="site_home_banner">صورة الصفحة الرئيسية</label>
-                        <input type="file" name="site_home_banner" id="site_home_banner" class="form-control site_home_banner_image">
-                        @error('site_home_banner')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-                <!-- End Site Home Banner -->
             </div>
 
             <div class="row">
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-md-6">
                     <div class="form-group">
                         <img src="{{ URL::asset('uploads/setting_images/'.$setting['site_logo']) }}"  style="width: 100px" class="img-thumbnail logo-image-preview" alt="">
                     </div>
                 </div>
 
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-md-6">
                     <div class="form-group">
                         <img src="{{ URL::asset('uploads/setting_images/'.$setting['site_favicon']) }}"  style="width: 100px" class="img-thumbnail favicon-image-preview" alt="">
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <img src="{{ URL::asset('uploads/setting_images/'.$setting['site_home_banner']) }}"  style="width: 100px" class="img-thumbnail home-banner-image-preview" alt="">
                     </div>
                 </div>
             </div>
@@ -202,16 +185,6 @@
             var reader = new FileReader();
             reader.onload = function (e) {
                 $('.favicon-image-preview').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(this.files[0]);
-        }
-    });
-    // Site Home Banner image preview
-    $(".site_home_banner_image").change(function () {
-        if (this.files && this.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('.home-banner-image-preview').attr('src', e.target.result);
             }
             reader.readAsDataURL(this.files[0]);
         }

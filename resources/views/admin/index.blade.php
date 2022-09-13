@@ -5,7 +5,7 @@
 @endsection
 
 @section('css')
-
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 @endsection
 
 @section('content')
@@ -39,5 +39,6 @@
 @endsection
 
 @section('js')
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/toast-emoji@0.0.1/src/index.min.js"></script>
 @endsection

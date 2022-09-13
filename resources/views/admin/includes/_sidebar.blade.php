@@ -55,6 +55,14 @@
                             </a>
                             <ul class="menu-content">
                                 <li>
+                                    <a class="menu-item" href="{{ route('menus.index') }}">
+                                        <i class="icon-list mr-1"></i>
+                                        <span data-i18n="Third level">القوائم</span>
+                                        <span style="width: 35px;"></span>
+                                        <span class="badge badge-primary round"> {{ Menu::count() }} </span>
+                                    </a>
+                                </li>
+                                <li>
                                     <a class="menu-item" href="{{ route('pages.index') }}">
                                         <i class="icon-docs mr-1"></i>
                                         <span data-i18n="Third level"> الصفحات</span>
