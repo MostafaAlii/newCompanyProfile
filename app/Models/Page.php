@@ -8,9 +8,12 @@ class Page extends Model {
     protected $guarded = [];
     public $timestamps = true;
 
-    public function getImagePathAttribute() {
-        return asset('uploads/website/' . $this->image);
+    // get Page where status = 1 and sorting = 1 (primary page)
+    public function scopePrimary($query) {
+        return $query->whereStatus(1)->whereSorting(1);
     }
+
+
 
     public function status() {
         return $this->status ? 'فعــال' : 'غير فعــال';

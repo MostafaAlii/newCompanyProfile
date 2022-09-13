@@ -85,11 +85,30 @@
                     </div>
                 </div>
                 <!-- End Page Secondary Title -->
+                <!-- Start Page Sorting -->
+                <div class="col-12 col-md-4">
+                    <label for="sorting">ترتيب عرض الصفحة</label>
+                    <select name="sorting" class="form-control">
+                        <option value="1" {{ old('sorting') == 1 ? 'selected' : null }}>1</option>
+                        <option value="2" {{ old('sorting') == 2 ? 'selected' : null }}>2</option>
+                        <option value="3" {{ old('sorting') == 3 ? 'selected' : null }}>3</option>
+                        <option value="4" {{ old('sorting') == 4 ? 'selected' : null }}>4</option>
+                        <option value="5" {{ old('sorting') == 5 ? 'selected' : null }}>5</option>
+                        <option value="6" {{ old('sorting') == 6 ? 'selected' : null }}>6</option>
+                        <option value="7" {{ old('sorting') == 7 ? 'selected' : null }}>7</option>
+                        <option value="8" {{ old('sorting') == 8 ? 'selected' : null }}>8</option>
+                        <option value="9" {{ old('sorting') == 9 ? 'selected' : null }}>9</option>
+                        <option value="10" {{ old('sorting') == 10 ? 'selected' : null }}>10</option>
+                    </select>
+                    @error('sorting')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
+                </div>
+                <!-- End Page Sorting -->
             </div>
             <!-- End Page Primary & Secondary Title -->
 
             <!-- Start Page Description -->
-
             <div class="row">
                 <div class="col-12">
                     <div class="form-group">
@@ -118,28 +137,6 @@
             </div>
             <!-- End Status -->
 
-            <!-- Start Image & Image Prview -->
-            <div class="row pt-2">
-                <!-- Start Image -->
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label for="image">الصورة</label>
-                        <input type="file" name="image" id="image" class="form-control image">
-                        @error('image')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-                <!-- End Image -->
-                <!-- Start Image Preview -->
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <img src="{{ asset('uploads/website/default.png') }}"  style="width: 100px" class="img-thumbnail image-preview" alt="">
-                    </div>
-                </div>
-            </div>
-            <!-- End Image & Image Prview -->
-
             <div class="form-group pt-2 text-center">
                 <button type="submit" class="btn btn-primary">اضافة صفحة</button>
             </div>
@@ -150,16 +147,5 @@
 @endsection
 
 @section('js')
-<script>
-    // image preview
-    $(".image").change(function () {
-        if (this.files && this.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('.image-preview').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(this.files[0]);
-        }
-    });
-</script>
+
 @endsection

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('link')->unique();
-            $table->string('image')->default('default.png');
             $table->text('username')->nullable();
+            $table->enum('sorting', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])->default(1);
             $table->string('primary_title')->nullable();
             $table->string('secondry_title')->nullable();
             $table->text('description')->nullable();

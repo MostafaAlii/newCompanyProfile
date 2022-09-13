@@ -22,7 +22,7 @@
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">لوحة التحكم</a></li>
                     <li class="breadcrumb-item">
                         <a href="{{ route('pages.index') }}">الصفحات</a>
-                        <span class="badge badge-success round"> {{ $pages->total() }} </span>
+                        <span class="badge badge-success round"> {{ $pages->count() }} </span>
                     </li>
                 </ol>
             </div>
@@ -79,7 +79,6 @@
                     <tr>
                         <th>#</th>
                         <th>الاسم</th>
-                        <th>الصورة</th>
                         <th>الحالة</th>
                         <th>الرابط</th>
                         <th>مضافة بواسطة</th>
@@ -92,13 +91,6 @@
                         <tr>
                             <td>{{ $index + 1 }}</td>
                             <td>{{$page->name }}</td>
-                            <td>
-                                @if($page->image_path)
-                                    <img src="{{ $page->image_path }}" style="width: 50px; height: 50px;" class="img-thumbnail" alt="{{$page->name }}">
-                                @else
-                                    <img src="{{ asset('uploads/website/default.png') }}" style="width: 50px; height: 50px;" class="img-thumbnail" alt="{{$page->name }}">
-                                @endif
-                            </td>
                             <td>
                                 @if($page->status == 1)
                                     <span class="badge badge-success">مفعل</span>
@@ -134,7 +126,7 @@
                     <tr>
                         <td colspan="8">
                             <div class="float-right">
-                                {!! $pages->appends(request()->query())->links() !!}
+                                
                             </div>
                         </td>
                     </tr>

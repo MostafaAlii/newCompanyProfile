@@ -26,6 +26,9 @@ class SettingTableSeeder extends Seeder {
                 'key' => 'site_logo',
                 'value' => 'logo.png'
             ],[
+                'key' => 'site_home_banner',
+                'value' => 'home_banner.png'
+            ],[
                 'key' => 'site_favicon',
                 'value' => 'logo.ico'
             ],[

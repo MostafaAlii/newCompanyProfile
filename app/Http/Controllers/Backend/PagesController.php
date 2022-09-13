@@ -9,10 +9,9 @@ class PagesController extends Controller {
     public function index(Request $request) {
         $pages = Page::where(function($query) use ($request){
             return $query->when($request->search, function($q) use ($request){
-                return $q->where('name', 'like', '%' . $request->search . '%')
-                    ->orWhere('link', 'like', '%' . $request->search . '%');
+                return $q->where('name', 'like', '%' . $request->search . '%');
             });
-        })->latest()->paginate(10);
+        })->latest();
         return view('admin.pages.index', compact('pages'));
     }
 
@@ -25,22 +24,15 @@ class PagesController extends Controller {
             $request->validate([
                 'name' => 'required',
                 'link' => 'required|unique:pages,link',
-                'image' => 'image',
                 'status' => 'required|in:0,1',
+                'sorting' => 'required|in:1,2,3,4,5,6,7,8,9,10',
                 'primary_title' => 'required',
                 'secondry_title' => 'required',
                 'description' => 'sometimes|nullable',
             ]);
             $username = auth()->user()->name;
             $request->merge(['username' => $username]);
-            $request_data = $request->except(['image', 'submit', '_token']);
-            if ($request->image) {
-                Image::make($request->image)
-                    ->resize(300, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    })->save(public_path('uploads/website/' . $request->image->hashName()));
-                $request_data['image'] = $request->image->hashName();
-            }
+            $request_data = $request->except(['submit', '_token']);
             Page::create($request_data);
             return redirect()->route('pages.index')->with([
                 'message' => 'تم اضافة الصفحة بنجاح',
