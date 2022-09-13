@@ -10,7 +10,7 @@ class Page extends Model {
 
     // get Page where status = 1 and sorting = 1 (primary page)
     public function scopePrimary($query) {
-        return $query->whereStatus(1)->whereSorting(1);
+        return $query->whereStatus(1)->whereSorting(1)->first();
     }
 
 

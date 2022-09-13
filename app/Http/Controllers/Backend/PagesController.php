@@ -11,7 +11,7 @@ class PagesController extends Controller {
             return $query->when($request->search, function($q) use ($request){
                 return $q->where('name', 'like', '%' . $request->search . '%');
             });
-        })->latest();
+        })->latest()->paginate(10);
         return view('admin.pages.index', compact('pages'));
     }
 
@@ -20,12 +20,12 @@ class PagesController extends Controller {
     }
 
     public function store(Request $request) {
-        try{
+       // try{
             $request->validate([
                 'name' => 'required',
                 'link' => 'required|unique:pages,link',
                 'status' => 'required|in:0,1',
-                'sorting' => 'required|in:1,2,3,4,5,6,7,8,9,10',
+                'sorting' => 'required|unique:pages,sorting|in:1,2,3,4,5,6,7,8,9,10',
                 'primary_title' => 'required',
                 'secondry_title' => 'required',
                 'description' => 'sometimes|nullable',
@@ -38,12 +38,12 @@ class PagesController extends Controller {
                 'message' => 'تم اضافة الصفحة بنجاح',
                 'alert-type' => 'success'
             ]);
-        } catch (\Exception $e) {
+        /*} catch (\Exception $e) {
             return redirect()->route('pages.index')->with([
                 'message' => 'عفواً حدث خطأ ما',
                 'alert-type' => 'danger'
-            ]);
-        }
+            ]);*/
+        //}
     }
 
     /**

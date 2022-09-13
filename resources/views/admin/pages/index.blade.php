@@ -126,7 +126,7 @@
                     <tr>
                         <td colspan="8">
                             <div class="float-right">
-                                
+                                {!! $pages->appends(request()->query())->links() !!}
                             </div>
                         </td>
                     </tr>

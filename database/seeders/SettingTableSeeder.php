@@ -24,13 +24,13 @@ class SettingTableSeeder extends Seeder {
                 'value' => 'Company Address'
             ],[
                 'key' => 'site_logo',
-                'value' => 'logo.png'
+                'value' => ''
             ],[
                 'key' => 'site_home_banner',
-                'value' => 'home_banner.png'
+                'value' => ''
             ],[
                 'key' => 'site_favicon',
-                'value' => 'logo.ico'
+                'value' => ''
             ],[
                 'key' => 'site_facebook',
                 'value' => 'https://www.facebook.com'

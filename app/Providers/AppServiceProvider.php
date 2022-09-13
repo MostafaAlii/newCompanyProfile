@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with($setting);
         });
         // share pages content from backent to frontend
-        view()->composer('*', function ($view) {
+        /*view()->composer('*', function ($view) {
             $pages = Page::whereStatus(1)->get();
             $view->with('pages', $pages);
         });
@@ -39,8 +39,12 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) {
             $primary = Page::primary()->first();
             $view->with('primary', $primary);
-        });
-
+        });*/
+        $pages = Page::whereStatus(1)->get();
+        $primary = Page::primary()->first();
+        view()->share('pages', $pages);
+        view()->share('primary', $primary);
+        
 
     }
 }
