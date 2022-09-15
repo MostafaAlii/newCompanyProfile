@@ -15,4 +15,8 @@ class Menu extends Model {
     public function scopeActiveMenu($query) {
         return $query->whereStatus(1)->whereNull('deleted_at');
     }
+
+    public function menu_info() {
+        return $this->hasOne(MenuInfo::class, 'menu_id', 'id')->withDefault();
+    }
 }

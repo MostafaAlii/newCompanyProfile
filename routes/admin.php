@@ -24,6 +24,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::resource('pages', Backend\PagesController::class);
     Route::resource('menus', Backend\MenuController::class);
     Route::resource('sub-menus', Backend\SubMenuController::class);
+    Route::resource('menu-infos', Backend\MenuInfoController::class);
 });
 
 require __DIR__.'/auth.php';

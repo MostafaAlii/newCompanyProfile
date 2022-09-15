@@ -114,6 +114,11 @@
                             <td>{{$menu->created_at->diffForhumans() }}</td>
                             <td>
                                 <div class="btn-group">
+                                    <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale" data-toggle="modal" data-target="#createMenuInfo{{$menu->id}}">
+                                        <span class="icon text-white-50">
+                                            <i class="material-icons">info</i>
+                                        </span>
+                                    </a>
                                     <a href="{{ route('menus.edit', $menu->id) }}" class="btn btn-primary btn-sm">
                                         <i class="material-icons">edit</i>
                                     </a>
@@ -125,6 +130,7 @@
                                 </div>
                             </td>
                         </tr>
+                        @include('admin.menus.btn.createMenuInfo')
                     @empty
                         <tr>
                             <td colspan="8" class="text-center text-danger">

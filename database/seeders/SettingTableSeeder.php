@@ -34,6 +34,18 @@ class SettingTableSeeder extends Seeder {
             ],[
                 'key' => 'site_twitter',
                 'value' => 'https://www.twitter.com'
+            ],[
+                'key' => 'home_cover',
+                'value' => ''
+            ],[
+                'key' => 'home_description',
+                'value' => ''
+            ],[
+                'key' => 'home_primary_title',
+                'value' => ''
+            ],[
+                'key' => 'home_secondary_title',
+                'value' => ''
             ]
         ];
         DB::table('settings')->insert($settings);

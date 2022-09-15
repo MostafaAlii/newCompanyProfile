@@ -5,7 +5,7 @@
 @endsection
 
 @section('css')
-
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 @endsection
 
 @section('content')
@@ -159,6 +159,86 @@
                 </div>
             </div>
 
+            <hr>
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">اعدادات الصفحة الرئيسية</h4>
+                    <a class="heading-elements-toggle"><i
+                            class="la la-ellipsis-v font-medium-3"></i></a>
+                    <div class="heading-elements">
+                        <ul class="list-inline mb-0">
+                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                            <li><a data-action="close"><i class="ft-x"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-content collapse show">
+                    <div class="card-body card-dashboard">
+                        <!-- Start Page Primary & Secondary Title -->
+                        <div class="row">
+                            <!-- Start Page Primary Title -->
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="home_primary_title">العنوان الرئيسى</label>
+                                    <input type="text" name="home_primary_title" id="primary_title" class="form-control" placeholder="ادخل العنوان الرئيسى" value="{{ old('home_primary_title', $setting['home_primary_title']) }}">
+                                    @error('home_primary_title')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <!-- End Page Primary Title -->
+                            <!-- Start Page Secondary Title -->
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="home_secondary_title">العنوان الفرعى</label>
+                                    <input type="text" name="home_secondary_title" id="home_secondary_title" class="form-control" placeholder="ادخل العنوان الفرعى" value="{{ old('home_secondary_title', $setting['home_secondary_title']) }}">
+                                    @error('home_secondary_title')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <!-- End Page Secondary Title -->
+                        </div>
+                        <!-- End Page Primary & Secondary Title -->
+                        <!-- Start Page Description -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="description">الوصف</label>
+                                    <textarea name="home_description" id="home_description" class="form-control" placeholder="ادخل الوصف">{{ old('home_description', $setting['home_description']) }}</textarea>
+                                    @error('home_description')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Page Description -->
+                        <!-- Start Home Page Cover Image -->
+                        <div class="row">
+                            <!-- Start Home Page Cover -->
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="home_cover">غلاف الصفحة الرئيسية</label>
+                                    <input type="file" name="home_cover" id="home_cover" class="form-control home_cover_image">
+                                    @error('home_cover')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <img src="{{ URL::asset('uploads/setting_images/'.$setting['home_cover']) }}"  style="width: 100px" class="img-thumbnail home_cover-image-preview" alt="">
+                                </div>
+                            </div>
+                            <!-- End Home Page Cover -->
+                        </div>
+                        <!-- End Home Page Cover Image -->
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group pt-2 text-center">
                 <button type="submit" class="btn btn-primary">حفظ</button>
             </div>
@@ -168,7 +248,18 @@
 @endsection
 
 @section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script>
+    // Site Logo image preview
+    $(".home_cover_image").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('home_cover-image-preview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
     // Site Logo image preview
     $(".site_logo_image").change(function () {
         if (this.files && this.files[0]) {

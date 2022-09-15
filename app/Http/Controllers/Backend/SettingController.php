@@ -30,7 +30,7 @@ class SettingController extends Controller {
 
     public function update(Request $request) {
         try{
-            $info = $request->except('_token', '_method', 'site_logo', 'site_favicon');
+            $info = $request->except('_token', '_method', 'site_logo', 'site_favicon', 'home_cover');
             foreach ($info as $key=> $value){
                 Setting::where('key', $key)->update(['value' => $value]);
             }
@@ -40,21 +40,30 @@ class SettingController extends Controller {
                 $file->move(public_path('uploads/setting_images'), $file_name);
                 Setting::where('key', 'site_logo')->update(['value' => $file_name]);   
             }
+            if($request->hasFile('home_cover')){
+                $file = $request->file('home_cover');
+                $file_name = md5($file->getClientOriginalName() . time()) . '_home_cover.' . $file->getClientOriginalExtension();
+                $file->move(public_path('uploads/setting_images'), $file_name);
+                Setting::where('key', 'home_cover')->update(['value' => $file_name]);   
+            }
             if($request->hasFile('site_favicon')){
                 $file = $request->file('site_favicon');
                 $file_name = md5($file->getClientOriginalName() . time()) . '_favicon.' . $file->getClientOriginalExtension();
                 $file->move(public_path('uploads/setting_images'), $file_name);
                 Setting::where('key', 'site_favicon')->update(['value' => $file_name]);
             }
-            return redirect()->route('settings.index')->with([
+            
+            $notification = array(
                 'message' => 'تم تحديث الاعدادات بنجاح',
                 'alert-type' => 'success'
-            ]);
+            );
+            return redirect()->route('settings.index')->with($notification);
         } catch (\Exception $e) {
-            return redirect()->route('settings.index')->with([
-                'message' => 'عفواً حدث خطأ ما',
-                'alert-type' => 'danger'
-            ]);
+            $notification = array(
+                'message' => 'حدث خطأ ما',
+                'alert-type'    => 'error'
+            );
+            return redirect()->route('settings.index')->with($notification);
         }
     }
 

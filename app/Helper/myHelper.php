@@ -8,9 +8,10 @@ if (!function_exists('getSetting')) {
     }
 }
 
-if (!function_exists('getMenus')) {
+/*if (!function_exists('getMenus')) {
     function getMenus() {
-        $menus = Menu::whereStatus(1)->orderBy('sorting')->get();
+        $menus = Menu::activeMenu()->orderBy('sorting')->get();
         return $menus;
     }
-}
+}*/
+

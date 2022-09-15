@@ -18,56 +18,27 @@
                     <i class="fas fa-stream navbar-toggler-icon"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    {{--<ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{route('home') }}">الرئيسية</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">من نحن</a>
+                            <a class="nav-link" href="{{route('home') }}">الرئيسية</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              خدماتنا
+                                خدماتنا
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <li><a class="dropdown-item" href="#">Action</a></li>
-                              <li><a class="dropdown-item" href="#">Another action</a></li>
-                              <li><hr class="dropdown-divider"></li>
-                              <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><a class="dropdown-item" href="#">1</a></li>
+                                <li><a class="dropdown-item" href="#">2</a></li>
+                                <li><a class="dropdown-item" href="#">3</a></li>
+                                <li><a class="dropdown-item" href="#">4</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">اتصل بنا</a>
+                            <a class="nav-link" href="{{--route('about-us') --}}">من نحن</a>
                         </li>
-                    </ul>--}}
-                    <ul class="navbar-nav ms-auto">
-                        {{-- use getMenu Helper function in forelse to get menu --}}
-                        @forelse(getMenus() as $menu)
-                            @if(count($menu->submenus) > 0)
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        {{ $menu->name }}
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        @foreach($menu->submenus as $submenu)
-                                            <li>
-                                                <a class="dropdown-item" href="#{{$submenu->name }}">
-                                                    {{ $submenu->name }}
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-                            @else
-                                <li class="nav-item">
-                                    <a class="nav-link {{ $menu->id }}" href="{{ $menu->link }}">{{ $menu->name }}</a>
-                                </li>
-                            @endif
-                        @empty
-                            <li class="nav-item">
-                                <a class="nav-link text-center text-danger">عفوا لا يوجد قوائم قم باضافة بعض القوائم من لوحة التحكم</a>
-                            </li>
-                        @endforelse
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{--route('contact-us') --}}">اتصل بنا</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
