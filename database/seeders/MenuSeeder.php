@@ -9,21 +9,21 @@ class MenuSeeder extends Seeder {
         $menus = [
             [
                 'name' => 'الرئيسية',
-                'link' => 'http://company.test/',
+                'link' => 'http://newcompanyprofile.test/',
                 'status' => 1,
                 'sorting' => 1,
                 'username' => 'superadmin',
                 'created_at' => now(),
             ],[
                 'name' => 'من نحن',
-                'link' => 'http://company.test/about',
+                'link' => 'http://newcompanyprofile.test/about',
                 'status' => 1,
                 'sorting' => 2,
                 'username' => 'superadmin',
                 'created_at' => now(),
             ],[
                 'name' => 'اتصل بنا',
-                'link' => 'http://company.test/contact',
+                'link' => 'http://newcompanyprofile.test/contact',
                 'status' => 1,
                 'sorting' => 3,
                 'username' => 'superadmin',

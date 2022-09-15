@@ -10,8 +10,11 @@
     <meta name="keywords" content="admin template, modern admin template, dashboard template, flat admin template, responsive admin template, web app, crypto dashboard, bitcoin dashboard">
     <meta name="author" content="PIXINVENT">
     <title>لوحة التحكم | @yield('pageTitle')</title>
-    <link rel="apple-touch-icon" href="{{ URL::asset('uploads/setting_images/'.$setting['site_favicon']) }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ URL::asset('uploads/setting_images/'.$setting['site_favicon']) }}">
+    @if(getSetting('site_favicon') != null)
+        <link rel="shortcut icon" href="{{ URL::asset('uploads/setting_images/'.getSetting('site_favicon')) }}" type="image/x-icon">
+    @else
+        <link rel="shortcut icon" href="{{ URL::asset('uploads/setting_images/no_favicon_found.png') }}" type="image/x-icon">
+    @endif
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/fonts/material-icons/material-icons.css') }}">
     <!-- BEGIN: Vendor CSS-->

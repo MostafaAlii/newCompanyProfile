@@ -7,12 +7,12 @@
             <!-- Start Nav -->
             <nav class="navbar navbar-expand-lg">
                 <a class="navbar-brand" href="{{route('home') }}">
-                    @if($setting['site_logo'] != null)
-                        <img src="{{ URL::asset('uploads/setting_images/'.$setting['site_logo']) }}" class="img-fluid" alt="{{ $setting['site_name'] . ' logo-img' }}">
+                    @if(getSetting('site_logo') != null)
+                        <img src="{{ URL::asset('uploads/setting_images/'.getSetting('site_logo')) }}" class="img-fluid" alt="{{ getSetting('site_name') . ' logo-img' }}">
                     @else
                         <img src="{{ URL::asset('uploads/setting_images/no_logo_found.png') }}" class="img-fluid" alt="banner">
                     @endif
-                    {{$setting['site_name']}}
+                    {{getSetting('site_name')}}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-stream navbar-toggler-icon"></i>
@@ -41,14 +41,15 @@
                         </li>
                     </ul>--}}
                     <ul class="navbar-nav ms-auto">
-                        @forelse($pages as $page)
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ $page->link }}">{{ $page->name }}</a>
-                                </li>
+                        {{-- use getMenu Helper function in forelse to get menu --}}
+                        @forelse(getMenus() as $menu)
+                            <li class="nav-item">
+                                <a class="nav-link {{ $menu->id }}" href="{{ $menu->link }}">{{ $menu->name }}</a>
+                            </li>
                         @empty
-                        <li class="nav-item">
-                            <a class="nav-link text-center text-danger">عفوا لا يوجد قوائم قم باضافة بعض القوائم من لوحة التحكم</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-center text-danger">عفوا لا يوجد قوائم قم باضافة بعض القوائم من لوحة التحكم</a>
+                            </li>
                         @endforelse
                     </ul>
                 </div>

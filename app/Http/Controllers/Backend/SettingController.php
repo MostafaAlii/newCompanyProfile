@@ -5,8 +5,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 class SettingController extends Controller {
     public function index() {
-        
-        return view('admin.setting.index');
+        $collection = Setting::all();
+        $setting =$setting['setting'] = $collection->flatMap(function ($collection) {
+            return [$collection->key => $collection->value];
+        });
+        return view('admin.setting.index' , compact('setting'));
     }
 
     public function create() {
