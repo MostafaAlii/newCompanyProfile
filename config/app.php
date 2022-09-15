@@ -217,6 +217,7 @@ return [
         'Category'=>App\Models\Category::class,
         'Project'=>App\Models\Project::class,
         'Menu'=>App\Models\Menu::class,
+        'SubMenu'=>App\Models\SubMenu::class,
         'Page'=>App\Models\Page::class,
     ])->toArray(),
 

@@ -11,7 +11,7 @@ class MenuRequest extends FormRequest {
             case 'POST' : {
                 return [
                     'name'          =>          'required|max:255|unique:menus,name',
-                    'link'          =>          'required|url|unique:menus,link',
+                    'link'          =>          'required|unique:menus,link',
                     'username'      =>          'sometimes|nullable',
                     'sorting'       =>          'required|in:1,2,3,4,5,6,7,8,9,10|numeric|min:1|max:10|unique:menus,sorting',
                     'status'        =>          'required|boolean|in:0,1',

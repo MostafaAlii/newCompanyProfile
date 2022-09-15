@@ -7,4 +7,12 @@ class Menu extends Model {
     protected $table = 'menus';
     protected $guarded = [];
     public $timestamps = true;
+
+    public function submenus() {
+        return $this->hasMany(SubMenu::class);
+    }
+
+    public function scopeActiveMenu($query) {
+        return $query->whereStatus(1)->whereNull('deleted_at');
+    }
 }

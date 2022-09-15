@@ -43,9 +43,26 @@
                     <ul class="navbar-nav ms-auto">
                         {{-- use getMenu Helper function in forelse to get menu --}}
                         @forelse(getMenus() as $menu)
-                            <li class="nav-item">
-                                <a class="nav-link {{ $menu->id }}" href="{{ $menu->link }}">{{ $menu->name }}</a>
-                            </li>
+                            @if(count($menu->submenus) > 0)
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{ $menu->name }}
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        @foreach($menu->submenus as $submenu)
+                                            <li>
+                                                <a class="dropdown-item" href="#{{$submenu->name }}">
+                                                    {{ $submenu->name }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link {{ $menu->id }}" href="{{ $menu->link }}">{{ $menu->name }}</a>
+                                </li>
+                            @endif
                         @empty
                             <li class="nav-item">
                                 <a class="nav-link text-center text-danger">عفوا لا يوجد قوائم قم باضافة بعض القوائم من لوحة التحكم</a>

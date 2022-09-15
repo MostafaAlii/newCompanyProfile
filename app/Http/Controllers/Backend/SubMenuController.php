@@ -1,37 +1,48 @@
 <?php
 namespace App\Http\Controllers\Backend;
-use App\Models\Menu;
-use Illuminate\Http\Request;
+use App\Models\{SubMenu, Menu};
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\MenuRequest;
-class MenuController extends Controller {
+use Illuminate\Http\Request;
+class SubMenuController extends Controller {
     public function index(Request $request) {
-        $menus = Menu::where(function($query) use ($request){
+        $menus = Menu::activeMenu()->get();
+        $submenus = SubMenu::where(function($query) use ($request){
             return $query->when($request->search, function($q) use ($request){
                 return $q->where('name', 'like', '%' . $request->search . '%');
             });
         })->latest()->paginate(10);
-        return view('admin.menus.index', compact('menus'));
+        return view('admin.submenus.index', compact('submenus', 'menus'));
     }
 
-    public function store(MenuRequest $request) {
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request) {
         // return $request->all();
         try {
             $username = auth()->user()->name;
             $request->merge(['username' => $username]);
             $dataRequest = $request->except('_token');
-            Menu::create($dataRequest);
+            SubMenu::create($dataRequest);
             $notification = array(
                 'message' => 'تم اضافة القائمة بنجاح',
                 'alert-type'    => 'success'
             );
-            return redirect()->route('menus.index')->with($notification);
+            return redirect()->route('sub-menus.index')->with($notification);
         } catch (\Exception $e) {
             $notification = array(
                 'message' => 'حدث خطأ ما',
                 'alert-type'    => 'error'
             );
-            return redirect()->route('menus.index')->with($notification);
+            return redirect()->route('sub-menus.index')->with($notification);
         }
     }
 

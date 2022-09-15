@@ -1,4 +1,4 @@
-<div class="modal fade text-left" id="addMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel70" aria-hidden="true">
+<div class="modal fade text-left" id="addSubMenus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel70" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header bg-primary white">
@@ -12,10 +12,10 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('menus.store') }}" method="post" autocomplete="off">
+            <form action="{{ route('sub-menus.store') }}" method="post" autocomplete="off">
                 @csrf
                 <div class="modal-body">
-                    <!-- Start Page Name & Page Link -->
+                    <!-- Start Menu Name & Menu Link -->
                     <div class="row">
                         <!-- Start Menu Name -->
                         <div class="col-12 col-md-6">
@@ -32,7 +32,7 @@
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="link">الرابط</label>
-                                <input type="text" name="link" id="link" class="form-control" placeholder="الرابط ادخل" value="{{ old('link') }}">
+                                <input type="url" name="link" id="link" class="form-control" placeholder="الرابط ادخل" value="{{ old('link') }}">
                                 @error('link')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -42,20 +42,31 @@
                     </div>
                     <!-- End Menu Name & Menu Link -->
 
+                    <!-- Start Menu Select from Menu::class -->
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <div class="form-group">
+                                <label for="menu_id">القائمة</label>
+                                <select name="menu_id" id="menu_id" class="form-control select2">
+                                    <optgroup label="اختر القائمة">
+                                        @forelse ($menus as $menu)
+                                            <option value="{{ $menu->id }}" {{ old('menu_id') == $menu->id ? 'selected' : '' }}>
+                                                {{ $menu->name }}
+                                            </option>
+                                        @empty
+                                            <option>لا يوجد قوائم اضف بعض القوائم الرئيسية</option>
+                                        @endforelse
+                                    </optgroup>
+                                </select>
+                                @error('menu_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Menu Select from Menu::class -->
                     <!-- Start Menu Sorting & Menu Status -->
                     <div class="row">
-                        <!-- Start Menu Status -->
-                        <div class="col-12 col-md-6">
-                            <label for="status">الحالة</label>
-                            <select name="status" class="form-control">
-                                <option value="1" {{ old('status') == 1 ? 'selected' : null }}>فعــال</option>
-                                <option value="0" {{ old('status') == 0 ? 'selected' : null }}>غير فعــال</option>
-                            </select>
-                            @error('status')
-                                    <span class="text-danger">{{$message}}</span>
-                                @enderror
-                        </div>
-                        <!-- End Menu Status -->
                         <!-- Start Menu Sorting -->
                         <div class="col-12 col-md-6">
                             <label for="sorting">ترتيب عرض القائمة</label>

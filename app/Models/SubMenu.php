@@ -11,37 +11,4 @@ class SubMenu extends Model {
     public function menu():BelongsTo {
         return $this->belongsTo(Menu::class);
     }
-
-    /** get active menu where status 1 */
-    public function scopeActive($query) {
-        return $query->where('status', 1);
-    }
-
-    /** get menu with parent menu */
-    public function scopeWithMenu($query) {
-        return $query->with('menu');
-    }
-
-    //* get menu with parent menu and active */
-    public function scopeWithMenuActive($query) {
-        return $query->withMenu()->active();
-    }
-
-    public function scopeWithMenuId($query, $menu_id) {
-        return $query->withMenu()->where('menu_id', $menu_id);
-    }
-
-    public function status () {
-        switch ($this->status) {
-            case 0:
-                return '<span class="badge badge-danger">غير فعال</span>';
-                break;
-            case 1:
-                return '<span class="badge badge-success">فعال</span>';
-                break;
-            default:
-                return '<span class="badge badge-danger">غير فعال</span>';
-                break;
-        }
-    }
 }

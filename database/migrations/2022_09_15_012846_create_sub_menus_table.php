@@ -11,7 +11,6 @@ return new class extends Migration {
             $table->foreignId('menu_id')->constrained();
             $table->text('username')->nullable();
             $table->enum('sorting', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])->default(1);
-            $table->boolean('status')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });
